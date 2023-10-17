@@ -22,24 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "LanternToggle",
-                    "type": "Button",
-                    "id": "d700628b-ca8a-4dce-b32c-485a9346d72b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CameraFlashToggle",
-                    "type": "Button",
-                    "id": "577a49f1-8c92-4062-a962-d9bb390b49a9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -161,28 +143,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "FlashlightToggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c854455a-567f-47bd-9b24-3083eaa89ac1",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LanternToggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b56e24d1-f48a-41d9-84f0-cb02ba696288",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraFlashToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

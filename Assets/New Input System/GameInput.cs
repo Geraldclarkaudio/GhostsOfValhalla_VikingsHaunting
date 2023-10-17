@@ -44,24 +44,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LanternToggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""d700628b-ca8a-4dce-b32c-485a9346d72b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CameraFlashToggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""577a49f1-8c92-4062-a962-d9bb390b49a9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,28 +167,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""FlashlightToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c854455a-567f-47bd-9b24-3083eaa89ac1"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LanternToggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b56e24d1-f48a-41d9-84f0-cb02ba696288"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraFlashToggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -217,8 +177,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_FlashlightToggle = m_Player.FindAction("FlashlightToggle", throwIfNotFound: true);
-        m_Player_LanternToggle = m_Player.FindAction("LanternToggle", throwIfNotFound: true);
-        m_Player_CameraFlashToggle = m_Player.FindAction("CameraFlashToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,16 +240,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_FlashlightToggle;
-    private readonly InputAction m_Player_LanternToggle;
-    private readonly InputAction m_Player_CameraFlashToggle;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
         public PlayerActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @FlashlightToggle => m_Wrapper.m_Player_FlashlightToggle;
-        public InputAction @LanternToggle => m_Wrapper.m_Player_LanternToggle;
-        public InputAction @CameraFlashToggle => m_Wrapper.m_Player_CameraFlashToggle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -307,12 +261,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @FlashlightToggle.started += instance.OnFlashlightToggle;
             @FlashlightToggle.performed += instance.OnFlashlightToggle;
             @FlashlightToggle.canceled += instance.OnFlashlightToggle;
-            @LanternToggle.started += instance.OnLanternToggle;
-            @LanternToggle.performed += instance.OnLanternToggle;
-            @LanternToggle.canceled += instance.OnLanternToggle;
-            @CameraFlashToggle.started += instance.OnCameraFlashToggle;
-            @CameraFlashToggle.performed += instance.OnCameraFlashToggle;
-            @CameraFlashToggle.canceled += instance.OnCameraFlashToggle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -323,12 +271,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @FlashlightToggle.started -= instance.OnFlashlightToggle;
             @FlashlightToggle.performed -= instance.OnFlashlightToggle;
             @FlashlightToggle.canceled -= instance.OnFlashlightToggle;
-            @LanternToggle.started -= instance.OnLanternToggle;
-            @LanternToggle.performed -= instance.OnLanternToggle;
-            @LanternToggle.canceled -= instance.OnLanternToggle;
-            @CameraFlashToggle.started -= instance.OnCameraFlashToggle;
-            @CameraFlashToggle.performed -= instance.OnCameraFlashToggle;
-            @CameraFlashToggle.canceled -= instance.OnCameraFlashToggle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -350,7 +292,5 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFlashlightToggle(InputAction.CallbackContext context);
-        void OnLanternToggle(InputAction.CallbackContext context);
-        void OnCameraFlashToggle(InputAction.CallbackContext context);
     }
 }

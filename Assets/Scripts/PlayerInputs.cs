@@ -16,21 +16,9 @@ public class PlayerInputs : MonoBehaviour
         _input = new GameInput();
         _input.Player.Enable();
         _input.Player.FlashlightToggle.performed += FlashlightToggle_performed;
-        _input.Player.LanternToggle.performed += LanternToggle_performed;
-        _input.Player.CameraFlashToggle.performed += CameraFlashToggle_performed;
-
         _light = GetComponent<PlayerLight>();
     }
 
-    private void CameraFlashToggle_performed(InputAction.CallbackContext context)
-    {
-        _light.ToggleCameraFlash();
-    }
-
-    private void LanternToggle_performed(InputAction.CallbackContext context)
-    {
-        _light.ToggleLantern();
-    }
 
     private void FlashlightToggle_performed(InputAction.CallbackContext context)
     {
