@@ -140,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146840955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146840955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 092a1f4fcccf9564995e61c9c4a65947, type: 3}
   m_Name: 
@@ -1702,8 +1702,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2779670264297555287, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779670264297555287, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
+      propertyPath: rotSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779670264297555287, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3238871145900826602, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1755,15 +1763,9 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: be09f64b0280db74f9abbc435701e192, type: 2}
     - target: {fileID: 7386636429189635784, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Clavicle_L'\n\tTransform 'Neck'\n\tTransform
-        'Head'\n\tTransform 'UpperLeg_L'\n\tTransform 'UpperLeg_R'\n\tTransform 'Hand_L'\n\tTransform
-        'Shoulder_L'\n\tTransform 'Clavicle_R'\n\tTransform 'Ankle_L'\n\tTransform
-        'Shoulder_R'\n\tand more ...\n\tFrom animation clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2779670264297555287, guid: 8144b63ccc1a76b48863c5be3a4da4f4, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
