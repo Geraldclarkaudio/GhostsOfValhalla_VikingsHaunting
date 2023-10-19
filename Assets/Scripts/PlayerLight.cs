@@ -66,12 +66,12 @@ public class PlayerLight : MonoBehaviour
         if (lightComponent.intensity == 55) // if its already on
         {
             lightComponent.intensity = 0;
-            boxCollider.center = new Vector3(0, 10, 3.3f); // moves up to call ontriggerexit
+            boxCollider.center = new Vector3(0, 10, 4.0f); // moves up to call ontriggerexit
             isFlashlightOn = false;// turn it off
         }
         else if(lightComponent.intensity == 0) // otherwise
         {
-            boxCollider.center = new Vector3(0,-1,3.3f); // moves back down to collide with floor and walls
+            boxCollider.center = new Vector3(0,-1,4.0f); // moves back down to collide with floor and walls
             lightComponent.intensity = 55;
             isFlashlightOn = true;
         }
