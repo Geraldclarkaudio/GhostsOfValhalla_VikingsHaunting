@@ -19,6 +19,11 @@ public class Flashlight : MonoBehaviour
             MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
             _renderer.enabled = true;
         }
+        if(other.CompareTag("Enemy1"))
+        {
+            Enemy1 enemy = other.GetComponent<Enemy1>();
+            enemy.FlashlightHit();
+        }
         
     }
 
