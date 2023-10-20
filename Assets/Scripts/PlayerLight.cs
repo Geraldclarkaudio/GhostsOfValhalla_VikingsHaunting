@@ -5,29 +5,39 @@ using UnityEngine;
 public class PlayerLight : MonoBehaviour
 {
     [SerializeField]
-    private GameObject flashlight;
-    [SerializeField]
-    private GameObject cameraFlash;
-
-    [SerializeField]
     private bool isFlashlightOn;
     [SerializeField]
     private float flashlightBattery = 10f;
+    Light lightComponent;
+    BoxCollider boxCollider;
+    private void Start()
+    {
+        lightComponent = FindObjectOfType<Flashlight>().GetComponent<Light>();
+        boxCollider = FindObjectOfType<Flashlight>().GetComponent<BoxCollider>();
+        boxCollider.center = new Vector3(0, 10, 3.3f); // moves up to call ontriggerexit
 
+    }
     private void Update()
     {
         FlashlightPower();
     }
 
-    public float FlashlightBattery()
+    //return type functions
+    public float FlashlightBattery() // returns battery life of flashlight
     {
         return flashlightBattery;
     }
 
+    public bool IsFlashlightOn()
+    {
+        return isFlashlightOn;
+    }
+    
     private void FlashlightPower() // decreases the power of the battery when its on and increases when its off. 
     {
         if (isFlashlightOn == true)
         {
+            
             flashlightBattery -= Time.deltaTime;
 
             if (flashlightBattery <= 0)
@@ -53,40 +63,17 @@ public class PlayerLight : MonoBehaviour
 
     public void ToggleFlashlight() // turns on the flashlight 
     {
-        if (flashlight.activeInHierarchy == true) // if its already on
+        if (lightComponent.intensity == 55) // if its already on
         {
-            flashlight.SetActive(false);
+            lightComponent.intensity = 0;
+            boxCollider.center = new Vector3(0, 10, 4.0f); // moves up to call ontriggerexit
             isFlashlightOn = false;// turn it off
         }
-        else if(flashlight.activeInHierarchy == false) // otherwise
+        else if(lightComponent.intensity == 0) // otherwise
         {
-            flashlight.SetActive(true);
+            boxCollider.center = new Vector3(0,-1,4.0f); // moves back down to collide with floor and walls
+            lightComponent.intensity = 55;
             isFlashlightOn = true;
         }
     }
-
-    ///Camera Flash Logic if we need it. 
-    
-    //public void ToggleCameraFlash()
-    //{
-    //    if (cameraFlash.activeInHierarchy == true)
-    //    {
-    //        cameraFlash.SetActive(false);
-    //    }
-    //    else if(cameraFlash.activeInHierarchy == false)
-    //    {
-    //        flashlight.SetActive(false);
-    //        lantern.SetActive(false);
-    //        cameraFlash.SetActive(true);
-    //        StartCoroutine(FlashDuration());
-    //    }
-    //}
-    //IEnumerator FlashDuration()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    cameraFlash.SetActive(false);
-    //}
-
-
-
 }
