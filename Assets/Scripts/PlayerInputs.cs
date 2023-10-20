@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,6 +18,12 @@ public class PlayerInputs : MonoBehaviour
     private bool walking;
     [SerializeField]
     private bool running;
+    [SerializeField]
+    private bool jumping;
+    Rigidbody _rigidbody;
+    [SerializeField]
+    private float jumpHeight = 900f;
+    
 
     
     void Start()
@@ -26,8 +33,10 @@ public class PlayerInputs : MonoBehaviour
         _input.Player.FlashlightToggle.performed += FlashlightToggle_performed;
         _input.Player.Run.performed += Run_performed;
         _input.Player.Run.canceled += Run_canceled;
+        _input.Player.Jump.performed += Jump_performed;
         _light = GetComponent<PlayerLight>();
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Run_canceled(InputAction.CallbackContext context)
@@ -44,19 +53,40 @@ public class PlayerInputs : MonoBehaviour
         _animator.SetBool("isRunning", true);
     }
 
+    private void Jump_performed(InputAction.CallbackContext context)
+    {
+        jumping = true;
+        _rigidbody.AddForce(Vector3.up * jumpHeight * Time.deltaTime, ForceMode.Impulse);
+        _animator.SetBool("isJumping", true);
+    }
+
+    private void Jump_canceled(InputAction.CallbackContext context)
+    {
+        jumping = false;
+        _animator.SetBool("isJumping", false);
+        
+    }
+
     private void FlashlightToggle_performed(InputAction.CallbackContext context)
     {
         _light.ToggleFlashlight();
     }
 
+    
+
     void Update()
     {
         var move = _input.Player.Move.ReadValue<Vector2>(); // poll the value of the vector 2
+        move = Quaternion.Euler(0, 0, 40) * move;
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
         
+        
+
         transform.Translate(moveDirection * Time.deltaTime * _speed, Space.World);
 
-        if((Mathf.Abs(move.x) > 0 || Mathf.Abs(move.y) > 0)) // if input is happening on either axis and not running
+        
+
+        if ((Mathf.Abs(move.x) > 0 || Mathf.Abs(move.y) > 0)) // if input is happening on either axis and not running
         {
             if(running == false)
             {
@@ -78,4 +108,7 @@ public class PlayerInputs : MonoBehaviour
 
         _animator.SetBool("isWalking", walking);
     }
+
+
+
 }
