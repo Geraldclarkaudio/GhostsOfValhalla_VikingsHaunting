@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -16,16 +17,23 @@ public class PlayerInputs : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private bool walking;
-    [SerializeField]
-    private bool running;
+    
     [SerializeField]
     private bool jumping;
     Rigidbody _rigidbody;
     [SerializeField]
     private float jumpHeight = 900f;
-    
 
     
+    [SerializeField]
+    private bool running;
+    private float currentStamina;
+    public float maxStamina = 10f;
+    [SerializeField]
+    Slider staminaSlider;
+
+
+
     void Start()
     {
         _input = new GameInput();
@@ -37,6 +45,8 @@ public class PlayerInputs : MonoBehaviour
         _light = GetComponent<PlayerLight>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        currentStamina = maxStamina;
+        staminaSlider = GetComponent<Slider>();
     }
 
     private void Run_canceled(InputAction.CallbackContext context)
@@ -72,7 +82,9 @@ public class PlayerInputs : MonoBehaviour
         _light.ToggleFlashlight();
     }
 
-    
+   
+
+
 
     void Update()
     {
@@ -107,7 +119,41 @@ public class PlayerInputs : MonoBehaviour
         }
 
         _animator.SetBool("isWalking", walking);
+        StaminaGauge();
+        
     }
+
+    public float TotalStamina() // returns stamina
+    {
+        return maxStamina;
+    }
+
+    public void StaminaGauge() // decreases the user's stamina when sprinting
+    {
+        if (running == true)
+        {
+
+            maxStamina -= Time.deltaTime;
+
+            if (currentStamina <= 0)
+            {
+                running = false;
+            }
+        }
+        else if (running == false)
+        {
+            if (currentStamina <= 10f)
+            {
+                currentStamina += Time.deltaTime;
+            }
+
+            if (maxStamina > 10f)
+            {
+                maxStamina = 10f;
+            }
+        }
+    }
+
 
 
 

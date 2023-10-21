@@ -30,12 +30,17 @@ public class PressurePlateScript : MonoBehaviour
     public bool DisableAnimations;
 
     Animator anim;
+    Animator doorAnim;
+    
+    
     AudioSource source;
 
     private void Awake()
     {
         anim = this.GetComponent<Animator>();
         source = this.GetComponent<AudioSource>();
+        doorAnim = GetComponent<Animator>();
+    
     }
 
     private void Update()
@@ -58,10 +63,11 @@ public class PressurePlateScript : MonoBehaviour
             if (!DisableAudio)
             {
                 anim.Play("PressurePlate_Press");
+                doorAnim.SetBool("doorOpen", true);
             }
 
             TagCollisionEnter.Invoke(); // Run all functions assigned to the 'On Tag Collision Enter' UnityEvent
-            PlayOpenDoorAnim();
+            
 
         }
 
@@ -94,9 +100,6 @@ public class PressurePlateScript : MonoBehaviour
         TagCollisionStay.Invoke();
     }
 
-    public void PlayOpenDoorAnim()
-    {
-        anim.Play("Door");
-    }
+   
 
 }
