@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class Flashlight : MonoBehaviour
@@ -17,7 +18,10 @@ public class Flashlight : MonoBehaviour
         if (other.CompareTag("Floor"))
         {
             MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
-            _renderer.enabled = true;
+            NavMeshSurface navSurface = other.GetComponent<NavMeshSurface>();
+            navSurface.enabled = false;
+            //_renderer.enabled = true; enables floor's mesh renderer 
+            _renderer.enabled = false;
         }
         if(other.CompareTag("Enemy1"))
         {
@@ -32,7 +36,9 @@ public class Flashlight : MonoBehaviour
             if (other.CompareTag("Floor"))
             {
                 MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
-                _renderer.enabled = false;
-            }
+                _renderer.enabled = true;
+            NavMeshSurface navSurface = other.GetComponent<NavMeshSurface>();
+            navSurface.enabled = true;
+        }
     }
 }

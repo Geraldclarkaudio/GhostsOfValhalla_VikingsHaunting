@@ -37,6 +37,9 @@ public abstract class EnemyBaseClass : MonoBehaviour
     protected bool dead;
     protected bool isStunned;
 
+    [SerializeField]
+    private Light _light;
+
     protected enum State
     {
         WaypointNav,
@@ -77,13 +80,14 @@ public abstract class EnemyBaseClass : MonoBehaviour
     #region CHASING BEHAVIOR
     public virtual void Chasing() // base line logic for chase behavior
     {
+        _light.intensity = 30f;
         if (isStunned == false)
         {
             _agent.isStopped = false;
 
             float distance = Vector3.Distance(transform.position, player.transform.position);
 
-            if (distance >= 2 && distance <= 6) //if player is withing this distance, chase them
+            if (distance >= 2 && distance <= 7.1f) //if player is withing this distance, chase them
             {
                 _agent.SetDestination(playerPosition.position);
             }
@@ -103,7 +107,9 @@ public abstract class EnemyBaseClass : MonoBehaviour
     #region WAYPOINT NAVIGATION
     public virtual void WaypointNavigation()
     {
-        if(_agent.enabled)
+        _light.intensity = 0f;
+
+        if (_agent.enabled)
         {
             if (wayPoints.Count > 0) // are there waypoints?
             {
@@ -121,7 +127,7 @@ public abstract class EnemyBaseClass : MonoBehaviour
                         StartCoroutine(Idle());
                     }
 
-                    if (distanceToPlayer <= 5)
+                    if (distanceToPlayer <= 7)
                     {
                         state = State.Chasing;
                     }
