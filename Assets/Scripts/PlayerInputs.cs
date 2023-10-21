@@ -72,6 +72,10 @@ public class PlayerInputs : MonoBehaviour
         _light.ToggleFlashlight();
     }
 
+    public void DisableInputs()
+    {
+        _input.Disable();
+    }
     
 
     void Update()

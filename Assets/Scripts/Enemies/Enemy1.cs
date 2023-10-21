@@ -8,18 +8,29 @@ public class Enemy1 : EnemyBaseClass
     public override void Start()
     {
         base.Start(); // gets necessary references
+        _canBeHit = true;
     }
 
     public override void Update()
     {
         base.Update();
+        if(GameManager.Instance.winGame == true)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void FlashlightHit()
     {
         isStunned = true;
         _agent.isStopped = true;
+        _canBeHit = false;
         StartCoroutine(ReturnToOriginalPos());
+    }
+
+    public bool CanBeHit()
+    {
+           return _canBeHit;
     }
 
     IEnumerator ReturnToOriginalPos()
@@ -31,6 +42,7 @@ public class Enemy1 : EnemyBaseClass
         _agent.enabled = true;
         _agent.isStopped = false;
         isStunned = false;
+        _canBeHit = true;
 
     }
 }

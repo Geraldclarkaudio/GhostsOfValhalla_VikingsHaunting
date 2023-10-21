@@ -18,27 +18,45 @@ public class Flashlight : MonoBehaviour
         if (other.CompareTag("Floor"))
         {
             MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
-            NavMeshSurface navSurface = other.GetComponent<NavMeshSurface>();
-            navSurface.enabled = false;
-            //_renderer.enabled = true; enables floor's mesh renderer 
+            NavMeshSurface navSurface = other.GetComponentInParent<NavMeshSurface>();
+            navSurface.enabled = false; // turn off nav mesh surface so the nav mesh agent doesnt see it anymore. 
             _renderer.enabled = false;
         }
         if(other.CompareTag("Enemy1"))
         {
             Enemy1 enemy = other.GetComponent<Enemy1>();
-            enemy.FlashlightHit();
+            if(enemy.CanBeHit() == true)
+            {
+                enemy.FlashlightHit();
+            }
+            else
+            {
+                return;
+            }
+
+        }
+        if(other.CompareTag("Wall"))
+        {
+            MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
+            _renderer.enabled = true;
         }
         
     }
 
     private void OnTriggerExit(Collider other)
     {
-            if (other.CompareTag("Floor"))
-            {
-                MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
-                _renderer.enabled = true;
-            NavMeshSurface navSurface = other.GetComponent<NavMeshSurface>();
+        if (other.CompareTag("Floor"))
+        {
+            MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
+            _renderer.enabled = true;
+            NavMeshSurface navSurface = other.GetComponentInParent<NavMeshSurface>();
             navSurface.enabled = true;
+        }
+
+        if (other.CompareTag("Wall"))
+        {
+            MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
+            _renderer.enabled = false;
         }
     }
 }
