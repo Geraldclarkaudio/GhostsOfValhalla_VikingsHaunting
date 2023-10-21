@@ -27,7 +27,6 @@ public class PlayerInputs : MonoBehaviour
     
     [SerializeField]
     private bool running;
-    private float currentStamina;
     public float maxStamina = 10f;
     [SerializeField]
     Slider staminaSlider;
@@ -45,8 +44,6 @@ public class PlayerInputs : MonoBehaviour
         _light = GetComponent<PlayerLight>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        currentStamina = maxStamina;
-        staminaSlider = GetComponent<Slider>();
     }
 
     private void Run_canceled(InputAction.CallbackContext context)
@@ -90,13 +87,9 @@ public class PlayerInputs : MonoBehaviour
     {
         var move = _input.Player.Move.ReadValue<Vector2>(); // poll the value of the vector 2
         move = Quaternion.Euler(0, 0, 40) * move;
-        Vector3 moveDirection = new Vector3(move.x, 0, move.y);
-        
-        
+        Vector3 moveDirection = new Vector3(move.x, 0, move.y); 
 
         transform.Translate(moveDirection * Time.deltaTime * _speed, Space.World);
-
-        
 
         if ((Mathf.Abs(move.x) > 0 || Mathf.Abs(move.y) > 0)) // if input is happening on either axis and not running
         {
@@ -140,16 +133,16 @@ public class PlayerInputs : MonoBehaviour
 
             maxStamina -= Time.deltaTime;
 
-            if (currentStamina <= 0)
+            if (maxStamina <= 0)
             {
                 running = false;
             }
         }
         else if (running == false)
         {
-            if (currentStamina <= 10f)
+            if (maxStamina <= 10f)
             {
-                currentStamina += Time.deltaTime;
+                maxStamina += Time.deltaTime;
             }
 
             if (maxStamina > 10f)
