@@ -11,7 +11,8 @@ public abstract class EnemyBaseClass : MonoBehaviour
     //Making variables protected allows only classes that inherit from this class to manipulate them. 
     [SerializeField]
     protected float HP;
-
+    [SerializeField]
+    protected bool _canBeHit;
     [SerializeField]
     protected float pointValue;
 
@@ -93,6 +94,8 @@ public abstract class EnemyBaseClass : MonoBehaviour
             }
             else if (distance <= 1.9f)
             {
+                GameManager.Instance.YouLose();
+
                 Debug.Log("YOU LOSE");
             }
             else if (distance >= 6.1f)
