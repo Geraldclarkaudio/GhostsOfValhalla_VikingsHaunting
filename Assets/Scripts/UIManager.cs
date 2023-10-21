@@ -18,25 +18,26 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _light = FindObjectOfType<PlayerLight>();    
+        _light = FindObjectOfType<PlayerLight>();
+        playerInputs = FindObjectOfType<PlayerInputs>();
     }
 
     public void Lose()
     {
         loseCanvas.SetActive(true);
-        PlayerInputs inputs = FindObjectOfType<PlayerInputs>();
-        inputs.DisableInputs();
+        
+        playerInputs.DisableInputs();
     }
 
     // Update is called once per frame
     void Update()
     {
         _lightSlider.value = _light.FlashlightBattery();
-
-        if(GameManager.Instance.gameOver == true)
+        staminaSlider.value = playerInputs.TotalStamina();
+        if (GameManager.Instance.gameOver == true)
         {
             Lose();
         }
-        staminaSlider.value = playerInputs.TotalStamina();
+
     }
 }

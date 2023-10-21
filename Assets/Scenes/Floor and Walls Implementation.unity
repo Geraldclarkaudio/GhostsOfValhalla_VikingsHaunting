@@ -4542,6 +4542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lightSlider: {fileID: 1596030243}
   staminaSlider: {fileID: 769546081}
+  loseCanvas: {fileID: 0}
 --- !u!4 &691067644
 Transform:
   m_ObjectHideFlags: 0
