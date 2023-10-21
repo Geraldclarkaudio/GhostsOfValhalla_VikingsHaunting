@@ -123,9 +123,14 @@ public class PlayerInputs : MonoBehaviour
         
     }
 
-    public float TotalStamina() // returns stamina
+    public float TotalStamina() // returns battery life of flashlight
     {
         return maxStamina;
+    }
+
+    public bool IsPlayerRunning() // returns stamina
+    {
+        return running;
     }
 
     public void StaminaGauge() // decreases the user's stamina when sprinting
