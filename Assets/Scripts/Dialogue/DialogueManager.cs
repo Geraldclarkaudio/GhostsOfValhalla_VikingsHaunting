@@ -43,8 +43,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogueIsPlaying = false;
-        dialoguePanel.SetActive(false);
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
     }
 
     private void ContinueDialogue_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
