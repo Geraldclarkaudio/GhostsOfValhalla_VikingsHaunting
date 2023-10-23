@@ -23,6 +23,8 @@ public class Enemy1 : EnemyBaseClass
     public void FlashlightHit()
     {
         isStunned = true;
+        musicManager.currentMusicChange = true;
+        musicManager.musicState = MusicManager.State.Explore;
         _agent.isStopped = true;
         _canBeHit = false;
         StartCoroutine(ReturnToOriginalPos());

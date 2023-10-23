@@ -17,6 +17,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    MusicManager musicManager;
+
+    private void Start()
+    {
+        musicManager = FindObjectOfType<MusicManager>();
+    }
+
     public bool winGame { get; set; }
     public bool gameOver { get; set; }
 
@@ -24,11 +31,13 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         winGame = true;
+        musicManager.PlayWinMX();
     }
 
     public void YouLose()
     {
         gameOver = true;
+        musicManager.PlayGameOverMX();
     }
 
     private void Awake()
