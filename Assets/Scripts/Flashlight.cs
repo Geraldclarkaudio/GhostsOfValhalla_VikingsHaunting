@@ -39,6 +39,8 @@ public class Flashlight : MonoBehaviour
         {
             MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
             _renderer.enabled = true;
+            Wall wall = other.GetComponent<Wall>();
+            wall.TurnOn();
         }
         
     }
@@ -51,12 +53,6 @@ public class Flashlight : MonoBehaviour
             _renderer.enabled = true;
             NavMeshSurface navSurface = other.GetComponentInParent<NavMeshSurface>();
             navSurface.enabled = true;
-        }
-
-        if (other.CompareTag("Wall"))
-        {
-            MeshRenderer _renderer = other.GetComponent<MeshRenderer>();
-            _renderer.enabled = false;
         }
     }
 }

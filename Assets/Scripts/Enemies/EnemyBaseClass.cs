@@ -41,6 +41,8 @@ public abstract class EnemyBaseClass : MonoBehaviour
     [SerializeField]
     private Light _light;
 
+    protected MusicManager musicManager;
+
     protected enum State
     {
         WaypointNav,
@@ -56,6 +58,7 @@ public abstract class EnemyBaseClass : MonoBehaviour
         dead = false;
         player = FindObjectOfType<PlayerInputs>();
         _agent = GetComponent<NavMeshAgent>();
+        musicManager = FindObjectOfType < MusicManager > ();
     }
 
 
@@ -95,12 +98,13 @@ public abstract class EnemyBaseClass : MonoBehaviour
             else if (distance <= 1.9f)
             {
                 GameManager.Instance.YouLose();
-
-                Debug.Log("YOU LOSE");
             }
-            else if (distance >= 6.1f)
+            else if (distance >= 7.1f)
             {
                 state = State.WaypointNav;
+                musicManager.currentMusicChange = true;
+
+                musicManager.musicState = MusicManager.State.Explore;
             }
         } 
     }
@@ -133,6 +137,10 @@ public abstract class EnemyBaseClass : MonoBehaviour
                     if (distanceToPlayer <= 7)
                     {
                         state = State.Chasing;
+            
+                        musicManager.currentMusicChange = true;
+                        musicManager.musicState =MusicManager.State.Chasing;
+
                     }
                 }
             }
