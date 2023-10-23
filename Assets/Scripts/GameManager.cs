@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         musicManager = FindObjectOfType<MusicManager>();
+        gameOver = false;
     }
 
     public bool winGame { get; set; }
@@ -50,6 +52,14 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+
+        if(gameOver == true)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("Game_Level1");
+            }
         }
     }
 }
