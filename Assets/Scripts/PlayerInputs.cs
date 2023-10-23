@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -34,9 +33,8 @@ public class PlayerInputs : MonoBehaviour
 
     DialogueManager dialogueManager;
 
-    void Start()
+    private void Awake()
     {
-
         _input = new GameInput();
         _input.Player.Enable();
         _input.Player.FlashlightToggle.performed += FlashlightToggle_performed;
@@ -44,6 +42,10 @@ public class PlayerInputs : MonoBehaviour
         _input.Player.Run.canceled += Run_canceled;
         _input.Player.Jump.performed += Jump_performed;
         _input.Player.ContinueDialogue.performed += ContinueDialogue_performed;
+    }
+
+    void Start()
+    {
         _light = GetComponent<PlayerLight>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();

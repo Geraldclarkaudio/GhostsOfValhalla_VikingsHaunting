@@ -43,11 +43,6 @@ public class PressurePlateScript : MonoBehaviour
     
     }
 
-    private void Update()
-    {
-        options = UnityEditorInternal.InternalEditorUtility.tags; // Get all available tags from the Editor
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         
