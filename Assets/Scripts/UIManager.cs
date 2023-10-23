@@ -15,12 +15,23 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject loseCanvas;
+
+    DialogueManager dialogueManager;
+    [SerializeField]
+    private TextAsset _inkJson;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         _light = FindObjectOfType<PlayerLight>();
         playerInputs = FindObjectOfType<PlayerInputs>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager.EnterDialogueMode(_inkJson);
     }
+
+
 
     public void Lose()
     {

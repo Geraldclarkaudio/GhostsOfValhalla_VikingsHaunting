@@ -62,6 +62,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContinueDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f96fd67-afe4-4b33-9d96-56497d3b0f8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b472e5b-b5df-441a-ac6a-0ea3d1a1ff88"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cb69d8d-fe0f-4615-bfff-6dceaa8c4076"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -252,6 +283,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_FlashlightToggle = m_Player.FindAction("FlashlightToggle", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_ContinueDialogue = m_Player.FindAction("ContinueDialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +349,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FlashlightToggle;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_ContinueDialogue;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -325,6 +358,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @FlashlightToggle => m_Wrapper.m_Player_FlashlightToggle;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @ContinueDialogue => m_Wrapper.m_Player_ContinueDialogue;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +380,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ContinueDialogue.started += instance.OnContinueDialogue;
+            @ContinueDialogue.performed += instance.OnContinueDialogue;
+            @ContinueDialogue.canceled += instance.OnContinueDialogue;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -362,6 +399,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ContinueDialogue.started -= instance.OnContinueDialogue;
+            @ContinueDialogue.performed -= instance.OnContinueDialogue;
+            @ContinueDialogue.canceled -= instance.OnContinueDialogue;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -385,5 +425,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnFlashlightToggle(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnContinueDialogue(InputAction.CallbackContext context);
     }
 }

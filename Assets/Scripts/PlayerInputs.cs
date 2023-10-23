@@ -32,18 +32,27 @@ public class PlayerInputs : MonoBehaviour
     Slider staminaSlider;
 
 
+    DialogueManager dialogueManager;
 
     void Start()
     {
+
         _input = new GameInput();
         _input.Player.Enable();
         _input.Player.FlashlightToggle.performed += FlashlightToggle_performed;
         _input.Player.Run.performed += Run_performed;
         _input.Player.Run.canceled += Run_canceled;
         _input.Player.Jump.performed += Jump_performed;
+        _input.Player.ContinueDialogue.performed += ContinueDialogue_performed;
         _light = GetComponent<PlayerLight>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+
+    private void ContinueDialogue_performed(InputAction.CallbackContext obj)
+    {
+        dialogueManager.ContinueStory();
     }
 
     private void Run_canceled(InputAction.CallbackContext context)
