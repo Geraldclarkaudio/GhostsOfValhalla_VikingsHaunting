@@ -63217,6 +63217,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 766253507}
     m_Modifications:
     - target: {fileID: 1283813193111256136, guid: 88f89c6500b14614ab6be2d31dd950b8, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1283813193111256136, guid: 88f89c6500b14614ab6be2d31dd950b8, type: 3}
       propertyPath: playerPosition
       value: 
       objectReference: {fileID: 855371218}
@@ -63228,10 +63232,6 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[1]
       value: 
       objectReference: {fileID: 112557314}
-    - target: {fileID: 1883909642537230814, guid: 88f89c6500b14614ab6be2d31dd950b8, type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1910230288702007221, guid: 88f89c6500b14614ab6be2d31dd950b8, type: 3}
       propertyPath: m_Name
       value: Enemy1
